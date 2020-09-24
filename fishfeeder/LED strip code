@@ -1,3 +1,11 @@
+
+#define LIGHT_STRIP_LED_COUNT 30              // Amount of LEDs on light strip
+#define LIGHT_STRIP_ANIMATION_COLOR 0x009BFF  // Color, with which feed animation will play
+#define LIGHT_STRIP_ANIMATION_DIRECTION 1     // Animation direction. Just choose what you want
+
+#include "FastLED.h"      // FastLED library for light strip
+
+
 void feed() {
     arduinoLed.displayChar('f');
     int timer = millis();
