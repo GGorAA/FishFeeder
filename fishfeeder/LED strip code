@@ -5,6 +5,8 @@
 
 #include "FastLED.h"      // FastLED library for light strip
 
+CRGB lightStrip[LIGHT_STRIP_LED_COUNT];  // LED strip object
+
 
 void feed() {
     arduinoLed.displayChar('f');
