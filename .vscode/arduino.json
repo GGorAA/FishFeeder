@@ -1,0 +1,4 @@
+{
+    "sketch": "fishfeeder/fishfeeder.ino",
+    "board": "arduino:avr:uno"
+}
