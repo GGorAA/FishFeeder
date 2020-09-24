@@ -8,7 +8,9 @@
 #define FEED_FREQUENCY 172800000  // Feed frequency
 #define FEED_WAIT_TIME            // Time, which servo will wait until it turns back to "closed" angle
 
-#define LIGHT_STRIP_LED_COUNT 30  // Amount of LEDs on light strip
+#define LIGHT_STRIP_LED_COUNT 30              // Amount of LEDs on light strip
+#define LIGHT_STRIP_ANIMATION_COLOR 0x009BFF  // Color, with which feed animation will play
+#define LIGHT_STRIP_ANIMATION_DIRECTION 1     // Animation direction. Just choose what you want
 
 // --------------------------Includes-------------------------- //
 
@@ -49,9 +51,45 @@ void loop() {
 
 void feed() {
     arduinoLed.displayChar('f');
-    feedLightStripAnim();
-    mainFeederServo.setTargetDeg(SERVO_ANGLE_OPEN);
+    int timer = millis();
+
+    drawFeedLightStripImage();
+    while (timer >= 5000) {
+        lightStripMoveImage(LIGHT_STRIP_ANIMATION_DIRECTION);
+        mainFeederServo.setTargetDeg(SERVO_ANGLE_OPEN);
+    }
 }
 
-void feedLightStripAnim() {
+void lightStripMoveImage(int direction) {
+    if (direction == 1) {
+        for (int i = 0; i > LIGHT_STRIP_LED_COUNT; i++) {
+            switch (i) {
+                case 0:
+                    lightStrip[i] = lightStrip[LIGHT_STRIP_LED_COUNT];
+                    break;
+
+                default:
+                    lightStrip[i] = lightStrip[i - 1];
+                    break;
+            }
+        }
+    } else if (direction == 2) {
+        for (int i = 0; i > LIGHT_STRIP_LED_COUNT; i++) {
+            switch (i) {
+                case LIGHT_STRIP_LED_COUNT:
+                    lightStrip[i] = lightStrip[0];
+                    break;
+
+                default:
+                    lightStrip[i] = lightStrip[i + 1];
+                    break;
+            }
+        }
+    }
+}
+
+void drawFeedLightStripImage() {
+    for (int i = LIGHT_STRIP_LED_COUNT; i < LIGHT_STRIP_LED_COUNT * 2; i++) {
+        lightStrip[i] = LIGHT_STRIP_ANIMATION_COLOR;
+    }
 }
