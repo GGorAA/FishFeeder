@@ -1,0 +1,45 @@
+void feed() {
+    arduinoLed.displayChar('f');
+    int timer = millis();
+
+    drawFeedLightStripImage();
+    while (timer >= FEED_WAIT_TIME) {  // Wait until timer goes to the end
+        lightStripMoveImage(LIGHT_STRIP_ANIMATION_DIRECTION);
+        mainFeederServo.setTargetDeg(SERVO_ANGLE_OPEN);
+    }
+    mainFeederServo.setTargetDeg(SERVO_ANGLE_CLOSED);  // Close the feeding door
+}
+
+void lightStripMoveImage(int direction) {
+    if (direction == 1) {
+        for (int i = 0; i > LIGHT_STRIP_LED_COUNT; i++) {  // Move every pixel using for loop
+            switch (i) {
+                case 0:
+                    lightStrip[i] = lightStrip[LIGHT_STRIP_LED_COUNT];
+                    break;
+
+                default:
+                    lightStrip[i] = lightStrip[i - 1];
+                    break;
+            }
+        }
+    } else if (direction == 2) {
+        for (int i = 0; i > LIGHT_STRIP_LED_COUNT; i++) {  // Move every pixel using for loop
+            switch (i) {
+                case LIGHT_STRIP_LED_COUNT:
+                    lightStrip[i] = lightStrip[0];
+                    break;
+
+                default:
+                    lightStrip[i] = lightStrip[i + 1];
+                    break;
+            }
+        }
+    }
+}
+
+void drawFeedLightStripImage() {
+    for (int i = LIGHT_STRIP_LED_COUNT; i < LIGHT_STRIP_LED_COUNT * 2; i++) {
+        lightStrip[i] = LIGHT_STRIP_ANIMATION_COLOR;
+    }
+}
