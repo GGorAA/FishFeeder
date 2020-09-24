@@ -1,4 +1,7 @@
 {
     "sketch": "fishfeeder/fishfeeder.ino",
-    "board": "arduino:avr:uno"
+    "board": "arduino:avr:uno",
+    "port": "/dev/tty.usbmodem14101",
+    "output": "build",
+    "debugger": "jlink"
 }
