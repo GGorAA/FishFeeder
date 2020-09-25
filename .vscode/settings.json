@@ -4,7 +4,7 @@
     "files.autoSaveDelay": 1,
     "arduino.path": "/Applications/Arduino.app",
     "arduino.additionalUrls": "",
-    "arduino.logLevel": "info",
+    "arduino.logLevel": "verbose",
     "arduino.enableUSBDetection": true,
     "C_Cpp.intelliSenseEngine": "Tag Parser",
     "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
