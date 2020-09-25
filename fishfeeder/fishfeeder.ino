@@ -8,7 +8,6 @@
 #define FEED_FREQUENCY 172800000  // Feed frequency
 #define FEED_WAIT_TIME 10         // Time, which servo will wait until it turns back to "closed" angle
 
-
 // --------------------------Includes-------------------------- //
 
 #include "MorsDuino.h"    // Morse code generator
@@ -19,8 +18,8 @@
 /*
  * Objects
  */
-ServoSmooth mainFeederServo(180);        // Servo object
-MorsDuinoLed arduinoLed(13);             // Built-in Arduino LED object
+ServoSmooth mainFeederServo(180);  // Servo object
+MorsDuinoLed arduinoLed(13);       // Built-in Arduino LED object
 
 /*
  * Variables
@@ -33,7 +32,7 @@ void setup() {
     // Setting up servo
     mainFeederServo.attach(SERVO_PIN, SERVO_ANGLE_CLOSED);  // Attach the servo and move it to starting angle
     mainFeederServo.smoothStart();                          // Make movement to starting angle smooth
-    arduinoLed.displayString("strt");
+    arduinoLed.displayString("strt");                       // Display starting morse code on built-in Arduino LED
 }
 
 void loop() {
